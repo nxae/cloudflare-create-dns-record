@@ -11,24 +11,27 @@ inputs:
     required: true
   content:
     description: 'DNS record content, e.g. "127.0.0.1"'
+    required: true
   ttl:
     description: "Time to live for DNS record. Value of 1 is 'automatic'"
+    required: false
     default: 1
   proxied:
     description: "Whether the record is receiving the performance and security benefits of Cloudflare"
+    required: false
     default: true
   token:
     description: "CloudFlare API token"
-    # default: ${{ secrets.CLOUDFLARE_TOKEN }}
     required: true
   zone:
     description: "CloudFlare zone"
-    # default: ${{ secrets.CLOUDFLARE_ZONE }}
     required: true
 
 outputs:
   id:
+    description: "id"
   name:
+    description: "name"
 
 runs:
   using: "node12"
