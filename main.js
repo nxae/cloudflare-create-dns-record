@@ -29,7 +29,7 @@ const curlResult = cp.spawnSync("curl", [
     ttl: Number(process.env.INPUT_TTL),
     proxied: shouldBeProxied,
   }),
-  `https://api.cloudflare.com/client/v4/zones/${process.env.INPUT_ZONE}/dns_records`,
+  `https://api.cloudflare.com/client/v4/zones/${process.env.INPUT_ZONE_ID}/dns_records`,
 ]);
 
 if (curlResult.status !== 0) {
