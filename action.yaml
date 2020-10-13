@@ -19,11 +19,11 @@ inputs:
     default: true
   token:
     description: "CloudFlare API token"
-    default: ${{ secrets.CLOUDFLARE_TOKEN }}
+    # default: ${{ secrets.CLOUDFLARE_TOKEN }}
     required: true
   zone:
-    default: "CloudFlare zone"
-    default: ${{ secrets.CLOUDFLARE_ZONE }}
+    description: "CloudFlare zone"
+    # default: ${{ secrets.CLOUDFLARE_ZONE }}
     required: true
 
 outputs:

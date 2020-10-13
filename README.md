@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: kriasoft/create-dns-record@v1
+      - uses: nxae/cloudflare-create-dns-record@v1
         with:
           type: "CNAME"
           name: "{PR}-review.example.com"
