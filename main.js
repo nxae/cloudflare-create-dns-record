@@ -14,7 +14,7 @@ if (['false', '0', 'no'].includes(process.env.INPUT_PROXIED)) {
   shouldBeProxied = false;
 }
 
-//https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+// https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
 const getCurrentRecordId = () => {
   const { status, stdout } = cp.spawnSync("curl", [
     ...["--header", `Authorization: Bearer ${process.env.INPUT_TOKEN}`],
@@ -22,7 +22,10 @@ const getCurrentRecordId = () => {
     `https://api.cloudflare.com/client/v4/zones/${process.env.INPUT_ZONE}/dns_records`,
   ]);
   const { success, result, errors } = JSON.parse(stdout.toString());
-  const name = process.env.INPUT_NAME;
+  const name = (process.env.INPUT_NAME || "")
+    .replace(/\{pr\}/gi, pr)
+    .replace(/\{pr_number\}/gi, pr)
+    .replace(/\{head_ref\}/gi, process.env.GITHUB_HEAD_REF);
   const record = result.find((x) => x.name === name);
 
   if (status !== 0) {
@@ -70,7 +73,7 @@ const createRecord = () => {
   console.log(`::set-output name=name::${result.name}`);
 };
 
-//https://api.cloudflare.com/#dns-records-for-a-zone-update-dns-record
+// https://api.cloudflare.com/#dns-records-for-a-zone-update-dns-record
 const updateRecord = (id) => {
   console.log(`Record exists with ${id}, updating...`);
   const { status, stdout } = cp.spawnSync("curl", [

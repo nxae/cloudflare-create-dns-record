@@ -1,6 +1,6 @@
 name: "Create DNS Record"
-description: "Creates a new CloudFlare DNS record"
-author: "Kriasoft"
+description: "Creates a new CloudFlare DNS record or update the existing one"
+author: "nxae"
 
 inputs:
   type:
@@ -24,7 +24,7 @@ inputs:
     description: "CloudFlare API token"
     required: true
   zone:
-    description: "CloudFlare zone"
+    description: "CloudFlare zone id"
     required: true
 
 outputs:
